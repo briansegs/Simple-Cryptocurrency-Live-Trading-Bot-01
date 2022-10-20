@@ -1,3 +1,4 @@
+import time
 import pandas as pd
 import sqlalchemy
 from kucoin_futures.client import WsToken
@@ -17,6 +18,7 @@ async def main():
     engine = sqlalchemy.create_engine('sqlite:///BTCUSDTstream.db')
     async def deal_msg(msg):
         frame = createframe(msg)
+        time.sleep(2)
         frame.to_sql('BTCUSDT', engine, if_exists='append', index=False)
         print(frame)
 
